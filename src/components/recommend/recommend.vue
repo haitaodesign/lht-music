@@ -3,7 +3,7 @@
     <div class="recommend-content">
       <div v-if="recommends.length" class="slider-wrapper">
           <slider>
-            <div v-for="(item,index) in recommends" :key="index">
+            <div v-for="(item,index) in recommends">
               <a :href="item.linkUrl">
                 <img :src="item.picUrl" >
               </a>
@@ -27,6 +27,12 @@ export default {
     this._getRecommend();
   },
   methods: {
+    loadImage() {
+        if (!this.checkloaded) {
+          this.checkloaded = true
+          this.$refs.scroll.refresh()
+        }
+      },
     _getRecommend() {
       getRecommend().then(res => {
         this.recommends = res.data.slider
