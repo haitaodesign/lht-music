@@ -1,12 +1,12 @@
 <template>
   <div class="recommend">
-    <div class="recommend-content">
+    <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div v-if="recommends.length" class="slider-wrapper">
             <slider>
               <div v-for="(item,index) in recommends">
                 <a :href="item.linkUrl">
-                  <img :src="item.picUrl" >
+                  <img @load="loadImage" :src="item.picUrl" >
                 </a>
               </div>
             </slider>
@@ -26,13 +26,14 @@
           </ul>
         </div>
       </div>
-    </div>
+    </scroll>
   </div>
 </template>
 
 <script>
 import { getRecommend,getDiscList } from '../..//api/recommend';
 import Slider from '@/base/slider/slider.vue'
+import Scroll from '@/base/scroll/scroll.vue'
 export default {
   data(){
     return{
@@ -62,7 +63,8 @@ export default {
     }
   },
   components:{
-    Slider
+    Slider,
+    Scroll
   }
 };
 </script>
