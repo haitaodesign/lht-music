@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getRecommend } from '../..//api/recommend';
+import { getRecommend,getDiscList } from '../..//api/recommend';
 import Slider from '@/base/slider/slider.vue'
 export default {
   data(){
@@ -24,7 +24,8 @@ export default {
     }
   },
   created() {
-    this._getRecommend();
+    this._getRecommend()
+    this._getDiscList()
   },
   methods: {
     loadImage() {
@@ -37,6 +38,10 @@ export default {
       getRecommend().then(res => {
         this.recommends = res.data.slider
       });
+    },
+    async _getDiscList(){
+      const data = await getDiscList()
+      console.log(data)
     }
   },
   components:{
