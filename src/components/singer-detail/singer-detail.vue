@@ -6,9 +6,30 @@
 
 <script>
     import MusicList from '../music-list/music-list'
+    import {getSingerDetail} from '@/api/singer'
+    import {mapGetters} from 'vuex'
     export default {
         components:{
             MusicList
+        },
+        computed:{
+             ...mapGetters([
+                 'singer'
+             ])
+        },
+        mounted(){
+            this._getSingerDetail()
+        },
+        methods:{
+            async _getSingerDetail(){
+                if(!this.singer.id){
+                    this.$router.push({
+                        path:'/singer'
+                    })
+                }
+                const data = await getSingerDetail(this.singer.id)
+                console.log(data)
+            }
         }
     }
 </script>
